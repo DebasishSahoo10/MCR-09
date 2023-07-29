@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../Context/DataContext";
+import { NavLink } from "react-router-dom";
 
 export const Explore = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -13,19 +14,20 @@ export const Explore = () => {
     }
   };
   return (
-    <div style={{ textAlign: "left" }}>
+    <div style={{ textAlign: "left", paddingBottom : "40px" }}>
       <h2>Explore all the Videos</h2>
       <input
         type="text"
         placeholder="Search for Video Titles"
         style={{
-          height: "30px",
+          height: "35px",
           borderRadius: "4px",
           border: "1px white solid",
           width: "98%",
           color: "white",
           backgroundColor: "transparent",
-          fontSize : "medium"
+          fontSize : "medium",
+          marginBottom : "20px"
         }}
         onChange={(e) => setSearchKeys(e.target.value)}
       />
@@ -55,7 +57,7 @@ export const Explore = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ marginBottom: "0" }}>{vid.title}</p>
+                <p style={{marginBottom : "0"}}><NavLink to={`/video/${vid._id}`}>{vid.title}</NavLink></p>
                 <p style={{ marginTop: "0" }}>
                   {vid.views} Views - {vid.creator}
                 </p>

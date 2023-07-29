@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import { NavLink } from "react-router-dom";
 
 export const WatchLater = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -42,7 +43,7 @@ export const WatchLater = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ marginBottom: "0" }}>{vid.title}</p>
+                <p style={{marginBottom : "0"}}><NavLink to={`/video/${vid._id}`}>{vid.title}</NavLink></p>
                 <p style={{ marginTop: "0" }}>
                   {vid.views} Views - {vid.creator}
                 </p>

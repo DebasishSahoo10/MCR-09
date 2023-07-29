@@ -65,7 +65,7 @@ export const IndividualPlaylist = () => {
                     : "Add to"}{" "}
                   Watch Later
                 </button>
-                <button  style={{ width: "100%" }} onClick={()=>removeFromPlaylist(name, vid._id)}>Remove From Playlist</button>
+                <button  style={{ width: "100%", marginTop : "10px" }} onClick={()=>removeFromPlaylist(name, vid._id)}>Remove From Playlist</button>
               </div>
             </li>
           );
