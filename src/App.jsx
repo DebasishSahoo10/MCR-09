@@ -6,6 +6,7 @@ import { Categories } from "./Pages/Categories";
 import { WatchLater } from "./Pages/WatchLater";
 import { Explore } from "./Pages/Explore";
 import { Video } from "./Pages/Video";
+import { Playlist } from "./Pages/Playlist";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/watchlater" element={<WatchLater/>} />
           <Route path="/explore" element={<Explore/>} />
           <Route path="/video/:videoID" element={<Video/>} />
+          <Route path="/playlist" element={<Playlist/>}/>
         </Routes>
       </div>
     </div>

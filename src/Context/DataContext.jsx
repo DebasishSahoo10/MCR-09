@@ -296,8 +296,17 @@ const handleActions = (state, action) => {
         }
         return vid
       })
-      console.log(newVideos)
       return {...state,  newVideos}
+    }
+    case "CREATE_PLAYLIST" : return {...state, playlists : [...state.playlists, action.payload]}
+    case "ADD_TO_PLAYLIST" : {
+      const newPlaylist = state.playlists.map(play => {
+        if (play.name == action.payload.playlistName) {
+          play.videoIDs.push(action.payload.videoID)
+        }
+        return play
+      })
+      return {...state, playlists : newPlaylist}
     }
     default:
       return state;
