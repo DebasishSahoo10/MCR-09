@@ -30,6 +30,7 @@ export const Video = () => {
           note: newNote.note,
         },
       });
+      setIsEdit(false)
     } else {
       dispatch({
         type: "ADD_NOTE",
