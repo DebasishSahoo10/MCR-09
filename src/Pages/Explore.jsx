@@ -21,13 +21,12 @@ export const Explore = () => {
         placeholder="Search for Video Titles"
         style={{
           height: "35px",
-          borderRadius: "4px",
-          border: "1px white solid",
           width: "98%",
           color: "white",
           backgroundColor: "transparent",
           fontSize : "medium",
-          marginBottom : "20px"
+          marginBottom : "20px",
+          paddingLeft : "10px"
         }}
         onChange={(e) => setSearchKeys(e.target.value)}
       />

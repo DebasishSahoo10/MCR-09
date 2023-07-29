@@ -101,7 +101,7 @@ export const Video = () => {
             type="text"
             name=""
             id=""
-            style={{ width: "60%", height: "30px" }}
+            style={{ width: "60%", height: "30px", marginBottom : "20px" }}
             value={newNote.note}
             onChange={(e) =>
               setNewNote({
