@@ -308,6 +308,19 @@ const handleActions = (state, action) => {
       })
       return {...state, playlists : newPlaylist}
     }
+    case "REMOVE_FROM_PLAYLIST" : {
+      const newPlaylist = state.playlists.map(play => {
+        if (play.name == action.payload.playlistName) {
+          play.videoIDs = play.videoIDs.filter(vid => vid !== action.payload.videoID.toString())
+        }
+        return play
+      })
+      return {...state, playlists : newPlaylist}
+    }
+    case "DELETE_PLAYLIST" : {
+      const newPlaylist = state.playlists.filter(play => play.name!==action.payload)
+      return {...state, playlists : newPlaylist}
+    }
     default:
       return state;
   }
