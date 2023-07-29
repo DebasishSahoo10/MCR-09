@@ -3,6 +3,7 @@ import "./App.css";
 import { SideNav } from "./Components/SideNav";
 import { Home } from "./Pages/Home";
 import { Categories } from "./Pages/Categories";
+import { WatchLater } from "./Pages/WatchLater";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/categories/:catID" element={<Categories/>}/>
+          <Route path="/watchlater" element={<WatchLater/>} />
         </Routes>
       </div>
     </div>

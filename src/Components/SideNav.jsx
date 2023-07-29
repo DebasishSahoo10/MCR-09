@@ -6,7 +6,7 @@ export const SideNav = () => {
             <p><NavLink to="/">Home</NavLink></p>
             <p>Explore</p>
             <p>Playlists</p>
-            <p>Watch Later</p>
+            <p><NavLink to="/watchlater">Watch Later</NavLink></p>
         </div>
     )
 }
