@@ -274,6 +274,31 @@ const handleActions = (state, action) => {
   
       return {...state, videos : newVideos};
     }
+    case "EDIT_NOTE" : {
+      const newVideos = state.videos.map(vid => {
+        if (vid._id == action.payload.videoID) {
+          vid.notes.map(note => {
+            if (note.noteID == action.payload.noteID) {
+              note.note = action.payload.note
+            }
+            return note
+          })
+        }
+        return vid
+      })
+      return {...state,  newVideos}
+    }
+    case "DELETE_NOTE" : {
+      console.log(action.payload)
+      const newVideos = state.videos.map(vid => {
+        if (vid._id == action.payload.videoID) {
+          vid.notes = vid.notes.filter(note => note.noteID!==action.payload.noteID)
+        }
+        return vid
+      })
+      console.log(newVideos)
+      return {...state,  newVideos}
+    }
     default:
       return state;
   }

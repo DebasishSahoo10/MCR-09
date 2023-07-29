@@ -2,19 +2,43 @@ import { useContext, useState } from "react";
 import { useParams } from "react-router";
 import { DataContext } from "../Context/DataContext";
 import { NavLink } from "react-router-dom";
-import { v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 
 export const Video = () => {
   const { videoID } = useParams();
   const { state, dispatch } = useContext(DataContext);
   const video = state.videos.filter((vid) => vid._id == videoID);
   const [noteInputDisplay, setNoteInputDisplay] = useState(false);
-  const [newNote, setNewNote] = useState({noteID : "", note : ""})
+  const [newNote, setNewNote] = useState({ noteID: "", note: "" });
+
+  const handleDeleteNote = (noteID) => {
+    dispatch({type : "DELETE_NOTE", payload : {videoID : videoID, noteID : noteID}})
+  };
+  const [isEdit, setIsEdit] = useState(false);
+  const handleEditNote = (noteID, note) => {
+    setNoteInputDisplay(true);
+    setIsEdit(true);
+    setNewNote({ noteID: noteID, note: note });
+  };
   const addNewNote = () => {
-    dispatch({type : "ADD_NOTE", payload : {videoID : video[0]._id, note : newNote}})
-    setNewNote({noteID : uuid(), note : ""})
-    setNoteInputDisplay(false)
-  }
+    if (isEdit) {
+      dispatch({
+        type: "EDIT_NOTE",
+        payload: {
+          videoID: videoID,
+          noteID: newNote.noteID,
+          note: newNote.note,
+        },
+      });
+    } else {
+      dispatch({
+        type: "ADD_NOTE",
+        payload: { videoID: video[0]._id, note: newNote },
+      });
+    }
+    setNewNote({ noteID: uuid(), note: "" });
+    setNoteInputDisplay(false);
+  };
   return (
     <div style={{ textAlign: "left", display: "flex", gap: "20px" }}>
       <div>
@@ -49,7 +73,12 @@ export const Video = () => {
             id=""
             style={{ width: "60%", height: "30px" }}
             value={newNote.note}
-            onChange={(e) => setNewNote({noteID : uuid(), note : e.target.value})}
+            onChange={(e) =>
+              setNewNote({
+                noteID: isEdit ? newNote.noteID : uuid(),
+                note: e.target.value,
+              })
+            }
           />
           <button
             style={{
@@ -64,13 +93,33 @@ export const Video = () => {
           </button>
         </div>
         <div>
-          <ul style={{flexDirection : "column"}}>
-            {video[0].notes.map((note,i) => {
+          <ul style={{ flexDirection: "column" }}>
+            {video[0].notes.map((note, i) => {
               return (
-                <li key={note.noteID} style={{display : "flex", gap : "10px"}}>
-                  <p style={{margin : "0"}}>{i} - {note.note}</p>
-                  <button style={{height : "25px", fontSize : "smaller", width : "60px"}}>Edit</button>
-                  <button style={{height : "25px", fontSize : "smaller", width : "60px"}}>Delete</button>
+                <li key={note.noteID} style={{ display: "flex", gap: "10px" }}>
+                  <p style={{ margin: "0" }}>
+                    {i} - {note.note}
+                  </p>
+                  <button
+                    style={{
+                      height: "25px",
+                      fontSize: "smaller",
+                      width: "60px",
+                    }}
+                    onClick={() => handleEditNote(note.noteID, note.note)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    style={{
+                      height: "25px",
+                      fontSize: "smaller",
+                      width: "60px",
+                    }}
+                    onClick={() => handleDeleteNote(note.noteID)}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}
