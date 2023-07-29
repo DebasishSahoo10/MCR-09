@@ -59,6 +59,7 @@ export const Video = () => {
     <div style={{ textAlign: "left", display: "flex", gap: "20px" }}>
       <div>
         <h2>{video[0].title}</h2>
+        <p>{video[0].views} Views - {video[0].creator}</p>
         <button
           style={{ width: "100%", height: "40px", marginBottom: "10px" }}
           onClick={() => handleWatchLater(video[0]._id)}
