@@ -1,6 +1,7 @@
 import { useContext} from "react";
 import { useParams } from "react-router";
 import { DataContext } from "../Context/DataContext";
+import { NavLink } from "react-router-dom";
 
 export const Categories = () => {
   const { catID } = useParams();
@@ -31,7 +32,7 @@ export const Categories = () => {
             >
               <img src={vid.thumbnail} alt="" style={{ width: "100%", height : "50%", objectFit : "cover" }} />
               <div style={{ height : "50%", display : "flex", flexDirection : "column", justifyContent : "space-between"}}>
-                <p style={{marginBottom : "0"}}>{vid.title}</p>
+                <p style={{marginBottom : "0"}}><NavLink to={`/video/${vid._id}`}>{vid.title}</NavLink></p>
                 <p style={{marginTop : "0"}}>
                   {vid.views} Views - {vid.creator}
                 </p>
